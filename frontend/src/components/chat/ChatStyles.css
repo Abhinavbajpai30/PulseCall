@@ -1,0 +1,184 @@
+/* Override Stream Chat Variables */
+:root {
+    --str-chat__primary-color: #6366f1;
+    --str-chat__active-primary-color: #4f46e5;
+    --str-chat__surface-color: #1e293b;
+    --str-chat__secondary-surface-color: #0f172a;
+    --str-chat__primary-surface-color: #1e293b;
+    --str-chat__primary-surface-color-low-emphasis: #334155;
+    --str-chat__border-radius-circle: 50%;
+    --str-chat__message-bubble-border-radius: 16px;
+    --str-chat__color-text-default: #f8fafc;
+}
+
+/* General Layout */
+.str-chat {
+    background-color: transparent;
+    height: 100%;
+    --str-chat__background-color: transparent;
+}
+
+.str-chat__channel-list {
+    background-color: var(--str-chat__secondary-surface-color);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    width: 100%;
+}
+
+.str-chat__channel-list-messenger {
+    background-color: transparent !important;
+}
+
+.str-chat__channel-preview {
+    background-color: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background-color 0.2s ease;
+}
+
+.str-chat__channel-preview:hover,
+.str-chat__channel-preview--active {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.str-chat__channel-preview-messenger--name {
+    color: #f8fafc;
+    font-weight: 600;
+}
+
+.str-chat__channel-preview-messenger--last-message {
+    color: #94a3b8;
+}
+
+.str-chat__channel-preview-messenger--time {
+    color: #64748b;
+}
+
+/* Message List */
+.str-chat__list {
+    background-color: transparent;
+}
+
+.str-chat__message-simple__content {
+    background-color: #1e293b;
+    /* Dark card color */
+    color: #f8fafc;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* My Messages */
+.str-chat__message-simple--me .str-chat__message-simple__content {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    color: white;
+    border: none;
+    border-bottom-right-radius: 4px;
+}
+
+/* Other Messages */
+.str-chat__message-simple--other .str-chat__message-simple__content {
+    background-color: #1e293b;
+    border-bottom-left-radius: 4px;
+}
+
+.str-chat__message-simple-name {
+    color: #94a3b8;
+    font-size: 0.75rem;
+}
+
+.str-chat__message-simple-timestamp {
+    color: #64748b;
+}
+
+/* Input */
+.str-chat__message-input {
+    background-color: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+}
+
+.str-chat__input-flat {
+    background-color: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+.str-chat__input-flat:focus-within {
+    border-color: #6366f1;
+}
+
+.str-chat__textarea textarea,
+.str-chat__input-flat-textarea {
+    color: white !important;
+    background-color: transparent !important;
+}
+
+.str-chat__textarea textarea::placeholder {
+    color: #64748b;
+}
+
+.str-chat__input-flat .str-chat__send-button {
+    display: none;
+    /* Hide default send button to use custom if needed, or style it */
+}
+
+/* Custom Send Button Styling if we keep default */
+.str-chat__send-button {
+    color: #6366f1;
+}
+
+/* Date Separator */
+.str-chat__date-separator-line {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.str-chat__date-separator-date {
+    color: #94a3b8;
+    background-color: #0f172a;
+    padding: 0 8px;
+}
+
+/* Avatar */
+.str-chat__avatar-image {
+    border: 2px solid #1e293b;
+}
+
+/* Reaction List */
+.str-chat__reaction-list {
+    background-color: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+}
+
+/* Thread */
+.str-chat__thread {
+    background-color: #0f172a;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.str-chat__thread-header {
+    background-color: #0f172a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Fix for white strip in channel list */
+.str-chat__channel-list-messenger,
+.str-chat__channel-list-messenger__main,
+.str-chat__loading-channels,
+.str-chat__theme-dark .str-chat__channel-list-messenger,
+.str-chat__theme-dark .str-chat__channel-list-messenger__main {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+.str-chat__main-panel,
+.str-chat__theme-dark .str-chat__main-panel {
+    background-color: transparent !important;
+}
+
+/* Ensure global variables are set for transparency */
+.str-chat,
+.str-chat__theme-dark {
+    --str-chat__background-color: transparent;
+    --str-chat__secondary-background-color: transparent;
+    --str-chat__message-textarea-background-color: transparent;
+    --str-chat__channel-preview-background-color: transparent;
+}
