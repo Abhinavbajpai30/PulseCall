@@ -9,16 +9,15 @@ import {
     Users
 } from 'lucide-react';
 
-const CallControls = ({ onLeave, onToggleChat, onToggleParticipants, showChat, showParticipants }) => {
-    const { useMicrophoneState, useCameraState, useScreenShareState } = useCallStateHooks();
+const CallControls = ({onLeave, onToggleChat, onToggleParticipants, showChat, showParticipants}) => {
+    const {useMicrophoneState, useCameraState, useScreenShareState} = useCallStateHooks();
 
-    const { microphone, isMute: isMicMuted } = useMicrophoneState();
-    const { camera, isMute: isCamMuted } = useCameraState();
-    const { screenShare, isMute: isScreenSharing } = useScreenShareState();
+    const {microphone, isMute: isMicMuted} = useMicrophoneState();
+    const {camera, isMute: isCamMuted} = useCameraState();
+    const {screenShare, isMute: isScreenSharing} = useScreenShareState();
 
     return (
         <div className="flex items-center justify-center gap-4 px-6 py-4 bg-black/60 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl transition-all duration-300 hover:bg-black/70">
-            {/* Microphone Toggle */}
             <button
                 onClick={() => microphone.toggle()}
                 className={`p-4 rounded-full transition-all duration-200 ${isMicMuted
@@ -30,7 +29,6 @@ const CallControls = ({ onLeave, onToggleChat, onToggleParticipants, showChat, s
                 {isMicMuted ? <MicOff className="w-6 h-6" /> : <Mic className="w-6 h-6" />}
             </button>
 
-            {/* Camera Toggle */}
             <button
                 onClick={() => camera.toggle()}
                 className={`p-4 rounded-full transition-all duration-200 ${isCamMuted
@@ -42,24 +40,18 @@ const CallControls = ({ onLeave, onToggleChat, onToggleParticipants, showChat, s
                 {isCamMuted ? <CameraOff className="w-6 h-6" /> : <Camera className="w-6 h-6" />}
             </button>
 
-            {/* Screen Share Toggle */}
             <button
                 onClick={() => screenShare.toggle()}
                 className={`p-4 rounded-full transition-all duration-200 ${isScreenSharing
-                        ? 'bg-gray-800/50 text-white hover:bg-gray-700/50 border border-white/10' // Not sharing (isMute is true when NOT sharing usually? Wait, let's check docs or assume standard toggle)
-                        // Actually Stream SDK: isMute is true when NOT sharing.
+                        ? 'bg-gray-800/50 text-white hover:bg-gray-700/50 border border-white/10'
                         : 'bg-green-500/20 text-green-500 hover:bg-green-500/30 border border-green-500/50'
                     }`}
                 title={isScreenSharing ? "Share Screen" : "Stop Sharing"}
             >
-                {/* Note: isMute logic might be inverted for screen share in some SDK versions, usually toggle() handles it. 
-             Let's assume isMute = true means NOT sharing. */}
                 {isScreenSharing ? <MonitorUp className="w-6 h-6" /> : <MonitorOff className="w-6 h-6" />}
             </button>
 
             <div className="w-px h-8 bg-white/10 mx-2" />
-
-            {/* Chat Toggle */}
             <button
                 onClick={onToggleChat}
                 className={`p-4 rounded-full transition-all duration-200 ${showChat
@@ -70,8 +62,6 @@ const CallControls = ({ onLeave, onToggleChat, onToggleParticipants, showChat, s
             >
                 <MessageSquare className="w-6 h-6" />
             </button>
-
-            {/* Participants Toggle */}
             <button
                 onClick={onToggleParticipants}
                 className={`p-4 rounded-full transition-all duration-200 ${showParticipants
@@ -84,8 +74,6 @@ const CallControls = ({ onLeave, onToggleChat, onToggleParticipants, showChat, s
             </button>
 
             <div className="w-px h-8 bg-white/10 mx-2" />
-
-            {/* Leave Call */}
             <button
                 onClick={onLeave}
                 className="p-4 rounded-full bg-red-600 text-white hover:bg-red-700 border border-red-500 shadow-lg shadow-red-900/20 transition-all duration-200"

@@ -7,7 +7,6 @@ const Settings = () => {
     const { showBrowserNotification, addToast } = useNotification();
     const { logout, user } = useAuth();
 
-    // Local state for settings - in a real app, these might come from a user preference API or context
     const [settings, setSettings] = useState({
         notifications: false,
         sound: true,
@@ -15,7 +14,6 @@ const Settings = () => {
     });
 
     useEffect(() => {
-        // Load settings from localStorage
         const savedSettings = localStorage.getItem('pulseCall_settings');
         if (savedSettings) {
             setSettings(JSON.parse(savedSettings));
@@ -30,13 +28,11 @@ const Settings = () => {
             localStorage.setItem('pulseCall_settings', JSON.stringify(newSettings));
 
             if (key === 'notifications' && newSettings[key]) {
-                // Request permission if enabling
                 if (Notification.permission !== 'granted') {
                     Notification.requestPermission().then(permission => {
                         if (permission === 'granted') {
                             showBrowserNotification('Notifications Enabled', { body: 'You will now receive notifications.' });
                         } else {
-                            // Revert if denied
                             setSettings(curr => ({ ...curr, notifications: false }));
                             addToast('Notification permission denied', 'error');
                         }
@@ -50,12 +46,9 @@ const Settings = () => {
 
     return (
         <div className="flex h-screen bg-gray-900 text-white">
-            {/* Main Content */}
             <div className="flex-1 overflow-y-auto p-8">
                 <div className="max-w-3xl mx-auto">
                     <h1 className="text-3xl font-bold mb-8">Settings</h1>
-
-                    {/* Profile Section */}
                     <div className="bg-gray-800 rounded-xl p-6 mb-6 shadow-lg border border-gray-700">
                         <div className="flex items-center gap-4 mb-6">
                             <div className="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center text-2xl font-bold">
@@ -70,8 +63,6 @@ const Settings = () => {
                             Edit Profile
                         </button>
                     </div>
-
-                    {/* Preferences */}
                     <div className="bg-gray-800 rounded-xl p-6 mb-6 shadow-lg border border-gray-700">
                         <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                             <Bell className="w-5 h-5 text-blue-500" />
@@ -110,8 +101,6 @@ const Settings = () => {
                             </div>
                         </div>
                     </div>
-
-                    {/* Account Actions */}
                     <div className="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700">
                         <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-red-500">
                             <Shield className="w-5 h-5" />

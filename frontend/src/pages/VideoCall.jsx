@@ -80,22 +80,14 @@ const VideoCall = () => {
     return (
         <StreamCall call={call}>
             <div className="relative w-full h-screen bg-black overflow-hidden flex">
-                {/* Main Video Area */}
                 <div className={`flex-1 relative transition-all duration-300 ${showChat || showParticipants ? 'mr-80' : ''}`}>
                     <div className="w-full h-full p-4">
-                        {/* We can switch between SpeakerLayout and PaginatedGridLayout based on preference or participant count */}
-                        {/* Customizing the layout to use our ParticipantTile is possible but complex with PaginatedGridLayout directly.
-                 For now, let's use the default layout but style it via CSS or use a custom renderer if needed. 
-                 Actually, Stream SDK allows custom ParticipantView. Let's stick to default layouts for robustness first, 
-                 then customize if needed. But user asked for "Large video grid".
-             */}
                         <PaginatedGridLayout
                             groupSize={12}
-                            VideoPlaceholder={ParticipantTile} // Trying to use our custom tile if compatible, or just rely on default
+                            VideoPlaceholder={ParticipantTile}
                         />
                     </div>
 
-                    {/* Floating Controls */}
                     <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-2xl px-4">
                         <CallControls
                             onLeave={() => {
@@ -116,14 +108,9 @@ const VideoCall = () => {
                     </div>
                 </div>
 
-                {/* Sidebar (Chat or Participants) */}
                 {(showChat || showParticipants) && (
                     <div className="absolute right-0 top-0 h-full w-80 bg-gray-900 border-l border-gray-800 z-40 shadow-2xl animate-in slide-in-from-right duration-300">
                         {showChat && (
-                            // Assuming Stream Chat client is available via context or we need to pass it.
-                            // Actually, we might need a separate Chat provider or reuse the one from App.jsx if it's available.
-                            // Since we wrapped App in StreamProvider (Chat), it should work if we have a channel.
-                            // We need to get or create a channel for this call.
                             <ChatSidebar callId={callId} />
                         )}
                         {showParticipants && (
@@ -138,18 +125,7 @@ const VideoCall = () => {
     );
 };
 
-// Helper component for Chat Sidebar
 const ChatSidebar = () => {
-    // Actually, we can use useChatContext from stream-chat-react if we are inside Chat component.
-    // But VideoCall is inside StreamProvider (Chat) in App.jsx? Yes.
-    // So we can use useChatContext.
-
-    // However, we need to ensure we have a channel.
-    // Let's create a channel based on callId.
-
-    // For simplicity in this step, I'll just put a placeholder or basic implementation.
-    // Real implementation requires `useChatContext` and creating a channel.
-
     return (
         <div className="h-full flex flex-col bg-gray-900 text-white">
             <div className="p-4 border-b border-gray-800">

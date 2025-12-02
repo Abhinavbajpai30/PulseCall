@@ -11,7 +11,6 @@ const registerUser = async (req, res) => {
     }
 
     const userExists = await User.findOne({email});
-
     if (userExists) {
         return res.status(400).json({message: 'User already exists'});
     }
@@ -25,7 +24,6 @@ const registerUser = async (req, res) => {
     });
 
     if (user) {
-        // Create Stream user
         const serverClient = StreamChat.getInstance(
             process.env.STREAM_API_KEY,
             process.env.STREAM_API_SECRET
@@ -52,7 +50,6 @@ const loginUser = async (req, res) => {
     const {email,password} = req.body;
 
     const user = await User.findOne({email});
-
     if (user && (await bcrypt.compare(password, user.password))) {
         res.json({
             _id: user.id,

@@ -12,16 +12,6 @@ const Dashboard = () => {
     const [activeChannel, setActiveChannel] = useState(null);
     const [isMobileListVisible, setIsMobileListVisible] = useState(true);
 
-    // We can use client.activeChannel to check if a channel is selected,
-    // but it might not trigger a re-render. 
-    // However, Channel component handles the context.
-    // For mobile toggle, we might need to listen to channel changes.
-    // Let's use a simple approach: if we are in a channel, show chat window on mobile.
-
-    // Actually, Stream's ChannelList sets the active channel on the client.
-    // We can use a custom hook or just rely on the UI.
-    // Let's keep it simple for now and refine if needed.
-
     const handleChannelSelect = (channel) => {
         setActiveChannel(channel);
         setIsMobileListVisible(false);
@@ -45,22 +35,16 @@ const Dashboard = () => {
 
     return (
         <div className="flex h-screen bg-dark-bg overflow-hidden">
-            {/* Sidebar Navigation */}
             <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
-
-            {/* Secondary Sidebar (Channel List) */}
             <div className={`w-full md:w-80 lg:w-96 flex-shrink-0 ${!isMobileListVisible ? 'hidden md:flex' : 'flex'}`}>
                 <CustomChannelList onChannelSelect={handleChannelSelect} />
             </div>
-
-            {/* Main Content Area */}
             <main className={`flex-1 flex flex-col min-w-0 bg-dark-bg relative ${isMobileListVisible ? 'hidden md:flex' : 'flex'}`}>
                 {activeChannel ? (
                     <Channel channel={activeChannel}>
                         <ChatWindow setIsMobileListVisible={setIsMobileListVisible} />
                     </Channel>
                 ) : (
-                    /* Welcome Screen */
                     <div className="flex-1 flex flex-col items-center justify-center text-center p-8">
                         <div className="w-24 h-24 rounded-3xl bg-gradient-to-tr from-primary/20 to-accent/20 flex items-center justify-center mb-8 animate-pulse">
                             <Video className="w-12 h-12 text-white opacity-80" />

@@ -3,7 +3,7 @@ import { ParticipantView, useParticipantViewContext } from '@stream-io/video-rea
 import { Mic, MicOff } from 'lucide-react';
 
 const ParticipantTile = ({ participant }) => {
-    const { isLocalParticipant } = useParticipantViewContext();
+    const {isLocalParticipant} = useParticipantViewContext();
 
     if (!participant) return null;
 
@@ -14,7 +14,6 @@ const ParticipantTile = ({ participant }) => {
                 className="w-full h-full object-cover"
             />
 
-            {/* Overlay info */}
             <div className="absolute bottom-3 left-3 flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 transition-opacity duration-300">
                 <span className="text-white text-sm font-medium truncate max-w-[120px]">
                     {participant.name || participant.userId} {isLocalParticipant && '(You)'}
@@ -27,7 +26,6 @@ const ParticipantTile = ({ participant }) => {
                 )}
             </div>
 
-            {/* Mic Status Indicator (Top Right) */}
             <div className="absolute top-3 right-3">
                 {!participant.isMicEnabled ? (
                     <div className="bg-red-500/80 p-1.5 rounded-full backdrop-blur-sm">
@@ -42,10 +40,9 @@ const ParticipantTile = ({ participant }) => {
                 )}
             </div>
 
-            {/* Connection Quality (Optional, if available in participant object) */}
             {/* <div className="absolute top-3 left-3">
-          <ConnectionQualityIndicator connectionQuality={participant.connectionQuality} />
-      </div> */}
+                    <ConnectionQualityIndicator connectionQuality={participant.connectionQuality} />
+                </div> */}
         </div>
     );
 };

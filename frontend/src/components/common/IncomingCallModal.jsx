@@ -7,8 +7,6 @@ const IncomingCallModal = ({ call, onDecline }) => {
     const audioRef = useRef(null);
 
     useEffect(() => {
-        // Play ringtone
-        // Using a placeholder sound for now. In production, use a local asset.
         // audioRef.current = new Audio('/sounds/ringtone.mp3'); 
         // audioRef.current.loop = true;
         // audioRef.current.play().catch(e => console.log("Audio play failed", e));
@@ -23,11 +21,8 @@ const IncomingCallModal = ({ call, onDecline }) => {
 
     const handleAccept = async () => {
         try {
-            // We don't join here, we just navigate to the video call page which handles joining.
-            // This prevents double-joining issues.
             navigate(`/video-call/${call.id}`);
-            // The modal should be closed by the parent when the call state changes or we navigate
-            if (onDecline) onDecline(); // Actually we might not want to decline, but clear the modal state
+            if (onDecline) onDecline();
         } catch (error) {
             console.error('Failed to accept call:', error);
         }

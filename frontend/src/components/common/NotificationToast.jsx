@@ -37,8 +37,6 @@ const ToastItem = ({ toast, removeToast }) => {
     };
 
     const getBgColor = () => {
-        // Using a consistent dark theme background with colored borders or accents could be nice.
-        // For now, let's stick to a clean dark card look.
         return 'bg-gray-800 border-gray-700 text-white';
     };
 

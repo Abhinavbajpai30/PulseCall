@@ -1,11 +1,6 @@
 const { StreamChat } = require('stream-chat');
 const User = require('../models/User');
 
-console.log('Stream Config:', {
-    apiKey: process.env.STREAM_API_KEY,
-    secretLength: process.env.STREAM_API_SECRET ? process.env.STREAM_API_SECRET.length : 0
-});
-
 const streamClient = StreamChat.getInstance(
     process.env.STREAM_API_KEY,
     process.env.STREAM_API_SECRET
@@ -42,13 +37,13 @@ const createStreamUser = async (req, res) => {
 
 const createCall = async (req, res) => {
     try {
-        const { type = 'default', callId, members } = req.body;
+        const {type='default',callId,members} = req.body;
         const userId = req.user.id;
 
-        const call = streamClient.video.call(type, callId);
+        const call = streamClient.video.call(type,callId);
 
-        const callMembers = members ? members.map(id => ({ user_id: id })) : [];
-        callMembers.push({ user_id: userId, role: 'host' });
+        const callMembers = members ? members.map(id => ({user_id: id})) : [];
+        callMembers.push({user_id:userId, role: 'host'});
 
         await call.create({
             data: {
@@ -70,10 +65,10 @@ const createCall = async (req, res) => {
 
 const getCallDetails = async (req, res) => {
     try {
-        const { callId } = req.params;
-        const { type = 'default' } = req.query;
+        const {callId} = req.params;
+        const {type='default'} = req.query;
 
-        const call = streamClient.video.call(type, callId);
+        const call = streamClient.video.call(type,callId);
         const callData = await call.get();
 
         res.status(200).json(callData);
@@ -85,15 +80,10 @@ const getCallDetails = async (req, res) => {
 
 const joinCall = async (req, res) => {
     try {
-        const { callId, type = 'default' } = req.body;
+        const {callId,type='default'} = req.body;
         const userId = req.user.id;
 
-        const call = streamClient.video.call(type, callId);
-
-        // Generate a token specifically for this call if needed, 
-        // but usually the main user token is enough. 
-        // Here we might just return call info or verify access.
-
+        const call = streamClient.video.call(type,callId);
         const callData = await call.get();
 
         res.status(200).json({

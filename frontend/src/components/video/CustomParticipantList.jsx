@@ -35,7 +35,6 @@ const CustomParticipantList = ({ onClose }) => {
                                         alt={participant.name}
                                         className="w-10 h-10 rounded-full object-cover border border-gray-600"
                                     />
-                                    {/* We could add speaking indicator here if available in participant state */}
                                 </div>
                                 <div>
                                     <p className="font-medium text-sm">

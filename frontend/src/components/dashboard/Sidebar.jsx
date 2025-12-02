@@ -21,7 +21,6 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
 
     return (
         <aside className="hidden md:flex flex-col w-20 lg:w-64 h-full bg-dark-card border-r border-white/5 transition-all duration-300">
-            {/* Logo Area */}
             <div className="p-6 flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/20">
                     <Video className="text-white" size={24} />
@@ -31,7 +30,6 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
                 </h1>
             </div>
 
-            {/* Navigation */}
             <nav className="flex-1 px-4 py-6 space-y-2">
                 {navItems.map((item) => {
                     const Icon = item.icon;
@@ -57,7 +55,6 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
                 })}
             </nav>
 
-            {/* Bottom Actions */}
             <div className="p-4 border-t border-white/5 space-y-2">
                 <button className="w-full flex items-center gap-4 p-3 rounded-xl text-gray-400 hover:bg-white/5 hover:text-white transition-all duration-300 group">
                     <Settings size={24} className="group-hover:rotate-90 transition-transform duration-500" />
@@ -72,7 +69,6 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
                     <span className="hidden lg:block font-medium">Logout</span>
                 </button>
 
-                {/* User Mini Profile */}
                 <div className="mt-4 flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5">
                     <img
                         src={user?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || 'User')}`}

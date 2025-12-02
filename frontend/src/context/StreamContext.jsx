@@ -34,13 +34,9 @@ export const StreamProvider = ({ children }) => {
 
                 const chatClient = StreamChat.getInstance(apiKey);
 
-                // Get token from backend
                 const response = await api.post('/stream/token');
-                const { token } = response.data;
+                const {token} = response.data;
 
-                // Sync user if needed (optional, but good practice)
-                // The backend creates the user on token generation usually, or we can explicitly call an endpoint
-                // But connectUser also updates user data if provided
                 await chatClient.connectUser(
                     {
                         id: user.id || user._id,

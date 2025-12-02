@@ -5,11 +5,9 @@ import { MessageCircle, Clock } from 'lucide-react';
 const ConversationList = ({ conversations = [], onSelectConversation, activeId }) => {
     const [searchResults, setSearchResults] = useState([]);
 
-    // Dummy search handler
     const handleSearch = (query) => {
-        // In a real app, this would filter users or fetch from API
         console.log('Searching for:', query);
-        // Simulating results
+        // Todo: Replace later with actual data
         if (query) {
             setSearchResults([
                 { id: 101, name: 'Alice Johnson', status: 'Online' },

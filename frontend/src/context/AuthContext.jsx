@@ -11,14 +11,14 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (email, password) => {
         try {
-            const response = await api.post('/auth/login', { email, password });
-            const { token, ...userData } = response.data;
+            const response = await api.post('/auth/login', {email, password});
+            const {token, ...userData} = response.data;
 
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(userData));
 
             setUser(userData);
-            return { success: true };
+            return {success: true};
         } catch (error) {
             return {
                 success: false,
@@ -29,14 +29,14 @@ export const AuthProvider = ({ children }) => {
 
     const register = async (username, email, password) => {
         try {
-            const response = await api.post('/auth/register', { username, email, password });
-            const { token, ...userData } = response.data;
+            const response = await api.post('/auth/register', {username, email, password});
+            const {token, ...userData} = response.data;
 
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(userData));
 
             setUser(userData);
-            return { success: true };
+            return {success: true};
         } catch (error) {
             return {
                 success: false,

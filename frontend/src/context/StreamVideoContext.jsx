@@ -5,7 +5,7 @@ import api from '../services/api';
 import StreamVideoContext from './useStreamVideo';
 
 export const StreamVideoProvider = ({ children }) => {
-    const { user } = useAuth();
+    const {user} = useAuth();
     const [client, setClient] = useState(null);
     const [isConnecting, setIsConnecting] = useState(false);
 
@@ -15,11 +15,6 @@ export const StreamVideoProvider = ({ children }) => {
 
         const initClient = async () => {
             if (!user) return;
-
-            // If we already have a client in state that matches user, we might not need to do anything?
-            // But this effect runs when user changes.
-            // If we have a client, we should probably disconnect it first?
-            // The cleanup function handles the previous client.
 
             setIsConnecting(true);
 
@@ -31,7 +26,7 @@ export const StreamVideoProvider = ({ children }) => {
                 }
 
                 const response = await api.post('/stream/token');
-                const { token } = response.data;
+                const {token} = response.data;
 
                 const userObj = {
                     id: user.id || user._id,
@@ -65,7 +60,7 @@ export const StreamVideoProvider = ({ children }) => {
     }, [user]);
 
     return (
-        <StreamVideoContext.Provider value={{ client, isConnecting }}>
+        <StreamVideoContext.Provider value={{client, isConnecting}}>
             {client ? (
                 <StreamVideo client={client}>
                     {children}

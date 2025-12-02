@@ -19,7 +19,6 @@ const UserSearchModal = ({ onClose, onUserSelect }) => {
             setLoading(true);
             try {
                 const response = await api.get(`/users/search?query=${query}`);
-                // Filter out current user
                 const filteredUsers = response.data.filter(u => u._id !== client.userID);
                 setUsers(filteredUsers);
             } catch (error) {

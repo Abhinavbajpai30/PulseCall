@@ -1,9 +1,6 @@
 const Conversation = require('../models/Conversation');
 const User = require('../models/User');
 
-// @desc    Get all conversations for a user
-// @route   GET /api/conversations
-// @access  Private
 const getConversations = async (req, res) => {
     try {
         const conversations = await Conversation.find({
@@ -19,9 +16,6 @@ const getConversations = async (req, res) => {
     }
 };
 
-// @desc    Create a new conversation
-// @route   POST /api/conversations
-// @access  Private
 const createConversation = async (req, res) => {
     try {
         const {participantId} = req.body;

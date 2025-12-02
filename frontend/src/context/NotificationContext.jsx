@@ -19,7 +19,6 @@ export const NotificationProvider = ({ children }) => {
     const [incomingCall, setIncomingCall] = useState(null);
     const { client: videoClient } = useStreamVideo();
 
-    // Toast Management
     const addToast = useCallback((message, type = 'info', duration = 5000) => {
         const id = Date.now().toString();
         setToasts((prev) => [...prev, { id, message, type, duration }]);
@@ -29,7 +28,6 @@ export const NotificationProvider = ({ children }) => {
         setToasts((prev) => prev.filter((toast) => toast.id !== id));
     }, []);
 
-    // Browser Notification Helper
     const showBrowserNotification = useCallback((title, options) => {
         if (!('Notification' in window)) return;
 
@@ -44,17 +42,14 @@ export const NotificationProvider = ({ children }) => {
         }
     }, []);
 
-    // Stream Video Events (Incoming Call)
     useEffect(() => {
         if (!videoClient) return;
 
         const unsubscribe = videoClient.on('call.ring', async (event) => {
-            const { call: eventCall } = event;
+            const {call: eventCall} = event;
             if (eventCall) {
-                // Instantiate a full Call object to ensure we have methods like join()
                 const call = videoClient.call(eventCall.type, eventCall.id);
 
-                // Fetch call data to get caller info (createdBy)
                 try {
                     await call.get();
                 } catch (err) {
@@ -63,7 +58,6 @@ export const NotificationProvider = ({ children }) => {
 
                 setIncomingCall(call);
 
-                // Optional: Play sound here or in the IncomingCallModal
                 const callerName = call.state?.createdBy?.name || call.state?.createdBy?.id || 'Unknown';
                 addToast(`Incoming call from ${callerName}`, 'incoming-call', 10000);
                 showBrowserNotification('Incoming Call', {
@@ -73,7 +67,6 @@ export const NotificationProvider = ({ children }) => {
             }
         });
 
-        // Also listen for call.ended or rejected to clear the modal
         const unsubscribeEnded = videoClient.on('call.ended', () => {
             setIncomingCall(null);
         });
@@ -84,23 +77,18 @@ export const NotificationProvider = ({ children }) => {
         };
     }, [videoClient, addToast, showBrowserNotification]);
 
-    // Stream Chat Events (New Message)
     const { client: chatClient } = useStream();
 
     useEffect(() => {
         if (!chatClient) return;
 
         const handleNewMessage = (event) => {
-            if (event.user?.id === chatClient.userID) return; // Ignore own messages
-
-            // Check if we are currently looking at this channel? 
-            // Ideally we only notify if not in the active channel, but for now simple notification is fine.
+            if (event.user?.id === chatClient.userID) return;
 
             addToast(`New message from ${event.user?.name || 'Unknown'}`, 'info');
 
-            // Play sound if enabled in settings (checking localStorage directly for simplicity)
             const settings = JSON.parse(localStorage.getItem('pulseCall_settings') || '{}');
-            if (settings.sound !== false) { // Default to true
+            if (settings.sound !== false) {
                 // const audio = new Audio('/sounds/message.mp3');
                 // audio.play().catch(e => {});
             }

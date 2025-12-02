@@ -6,7 +6,6 @@ const SearchBar = ({ onSearch, results = [], onSelectResult }) => {
     const [isOpen, setIsOpen] = useState(false);
     const searchRef = useRef(null);
 
-    // Debounce search
     useEffect(() => {
         const timer = setTimeout(() => {
             if (onSearch) onSearch(query);
@@ -14,7 +13,6 @@ const SearchBar = ({ onSearch, results = [], onSelectResult }) => {
         return () => clearTimeout(timer);
     }, [query, onSearch]);
 
-    // Close dropdown when clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -55,7 +53,6 @@ const SearchBar = ({ onSearch, results = [], onSelectResult }) => {
                 )}
             </div>
 
-            {/* Dropdown Results */}
             {isOpen && query && (
                 <div className="absolute mt-2 w-full bg-dark-card border border-white/10 rounded-xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
                     {results.length > 0 ? (

@@ -19,8 +19,7 @@ const ChatHeader = ({ setIsMobileListVisible }) => {
     const displayName = channel.data.name || (members.length > 0 ? members[0].user.name : 'Unknown');
     const isOnline = members.length > 0 ? members[0].user.online : false;
 
-    // Typing indicator logic
-    const typing = channel.state.typing; // This is an object { userId: { user: ... } }
+    const typing = channel.state.typing;
     const typingUsers = Object.values(typing).filter(t => t.user.id !== client.userID);
     const isTyping = typingUsers.length > 0;
 
@@ -38,7 +37,6 @@ const ChatHeader = ({ setIsMobileListVisible }) => {
             const callId = uuidv4();
             const call = videoClient.call('default', callId);
 
-            // Create call with members
             await call.getOrCreate({
                 ring: true,
                 data: {

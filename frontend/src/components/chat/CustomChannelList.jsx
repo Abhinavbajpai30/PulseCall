@@ -10,7 +10,6 @@ const CustomChannelPreview = (props) => {
     const isActive = activeChannel?.id === channel.id;
     const unreadCount = channel.countUnread();
 
-    // Get display name and image (logic for 1-on-1 vs group)
     const members = Object.values(channel.state.members).filter(
         ({ user }) => user.id !== client.userID
     );
